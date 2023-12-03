@@ -22,7 +22,7 @@ function createNewPost() {
 function deletePost() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      const poppedElement = posts.pop();
+      posts.pop();
       resolve();
     }, 1000);
   });
@@ -36,8 +36,7 @@ function printPost() {
 
 Promise.all([updateLastUserActivityTime(), createNewPost()]).then(() => {
   printPost();
-  deletePost().then(() => {
-    printPost();
-  });
   console.log(usersLastActivityTime);
 });
+
+deletePost().then(printPost);
